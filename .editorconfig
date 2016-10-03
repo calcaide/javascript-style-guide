@@ -1,0 +1,8 @@
+# editorconfig.org
+root = true
+
+# Markdown configuration
+[*.md]
+charset = utf-8
+indent_style = space
+indent_size = 4
