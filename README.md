@@ -121,6 +121,7 @@ this.someNumber = 17;
 // recommended
 ```
 
+**[⬆ back to top](#table-of-contents)**
 
 
 
