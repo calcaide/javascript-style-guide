@@ -157,22 +157,21 @@ export default api;
 ```
 
 <a name="modules--imports-above"></a><a name="2.3"></a>
-- [2.3](#modules--imports-above) Put all the imports above.
+- [2.3](#modules--imports-above) Put all the imports above. ESLint [plugin](https://github.com/benmosher/eslint-plugin-import/): [import/first](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md)
 
 *Why?* Imports are hoisted, keeping them all at the top, give up consistency and better developer experience.
 
 ```javascript
 // avoid
-import foo from 'foo';
+import library1 from 'library1';
+library1.init();
 
-foo.init();
-
-import bar from 'bar';
+import library2 from 'library2';
 
 // recommended
-import foo from 'foo';
-import bar from 'bar';
+import library1 from 'library1';
+import library2 from 'library2';
 
-foo.init();
+library1.init();
 ```
 
