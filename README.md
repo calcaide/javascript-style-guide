@@ -4,6 +4,7 @@
 - [Introduction](#introduction).
 - [References](#references).
 - [Naming conventions](#naming-conventions).
+- [Modules](#modules).
 
 ***
 
@@ -123,4 +124,55 @@ this.someNumber = 17;
 
 **[⬆ back to top](#table-of-contents)**
 
+
+## Modules
+
+<a name="modules--strict-mode"></a><a name="2.1"></a>
+- [2.1](#modules--strict-mode) Do not write more `"use strict"`. ESLint: [strict](http://eslint.org/docs/rules/strict).
+
+*Why?* because ES6 modules are always in strict mode. Here [the spec](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-mode-code).
+
+<a name="modules--use-modules"></a><a name="2.2"></a>
+- [2.2](#modules--use-modules) Use always ES6 modules (`import` / `export`) instead of a non-standard module system.
+
+```javascript
+// avoid (AMD)
+define(function(){
+    return something;
+});
+
+// avoid (CommonJS)
+module.exports = 'something';
+
+// recommended
+import assets from './assets';
+
+    // code...
+
+const api = {
+    getTask
+}
+
+export default api;
+```
+
+<a name="modules--imports-above"></a><a name="2.3"></a>
+- [2.3](#modules--imports-above) Put all the imports above.
+
+*Why?* Imports are hoisted, keeping them all at the top, give up consistency and better developer experience.
+
+```javascript
+// avoid
+import foo from 'foo';
+
+foo.init();
+
+import bar from 'bar';
+
+// recommended
+import foo from 'foo';
+import bar from 'bar';
+
+foo.init();
+```
 
