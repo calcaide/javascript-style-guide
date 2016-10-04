@@ -52,7 +52,7 @@ function getQueryObject() {
 ```
 
 <a name="naming--lowerCamelCase"></a><a name="1.2"></a>
-- [1.2](#naming--lowerCamelCase) Use lowerCamelCase when naming **objects**, **functions**, and **instances**. ESLint: [camelCase](http://eslint.org/docs/rules/camelcase).
+- [1.2](#naming--lowerCamelCase) Use lowerCamelCase when naming **objects**, **functions**, and **instances**. ESLint: [`camelCase](http://eslint.org/docs/rules/camelcase).
 
 ```javascript
 // avoid
@@ -71,7 +71,7 @@ function getQueryObject() {
 ```
 
 <a name="naming--UpperCamelCase"></a><a name="1.3"></a>
-- [1.3](#naming-UpperCamelCase) Use UpperCamelCase only when naming **constructors** or **classes**. ESLint: [new-cap](http://eslint.org/docs/rules/new-cap).
+- [1.3](#naming-UpperCamelCase) Use UpperCamelCase only when naming **constructors** or **classes**. ESLint: [`new-cap`](http://eslint.org/docs/rules/new-cap).
 
 ```javascript
 // avoid
@@ -95,7 +95,7 @@ const myAccount = new BankAccount('Something');
 ```
 
 <a name="naming--UPPERCASE"></a><a name="1.4"></a>
-- [1.4](#naming-UPPERCASE) Use UPPER_CASE for **constants**. ESLint: [camelCase](http://eslint.org/docs/rules/camelcase).
+- [1.4](#naming-UPPERCASE) Use UPPER_CASE for **constants**. ESLint: [`camelCase`](http://eslint.org/docs/rules/camelcase).
 
 ```javascript
 // avoid
@@ -106,7 +106,7 @@ const USER_PERMISSIONS = 0777;
 ```
 
 <a name="naming--underscores"></a><a name="1.5"></a>
-- [1.5](#naming--underscores) Do not use trailing or leading underscores. ESLint: [no-underscore-dangle](http://eslint.org/docs/rules/no-underscore-dangle).
+- [1.5](#naming--underscores) Do not use trailing or leading underscores. ESLint: [`no-underscore-dangle`](http://eslint.org/docs/rules/no-underscore-dangle).
 
 *This rule is for the long history of using dangling underscores to indicate "private" members of objects, take more information about that in the ESLint rule [no-underscore-dangle](http://eslint.org/docs/rules/no-underscore-dangle).*
 
@@ -128,7 +128,7 @@ this.someNumber = 17;
 ## Modules
 
 <a name="modules--strict-mode"></a><a name="2.1"></a>
-- [2.1](#modules--strict-mode) Do not write more `"use strict"`. ESLint: [strict](http://eslint.org/docs/rules/strict).
+- [2.1](#modules--strict-mode) Do not write more `"use strict"`. ESLint: [`strict`](http://eslint.org/docs/rules/strict).
 
 *Why?* because ES6 modules are always in strict mode. Here [the spec](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-mode-code).
 
@@ -157,7 +157,7 @@ export default api;
 ```
 
 <a name="modules--imports-above"></a><a name="2.3"></a>
-- [2.3](#modules--imports-above) Put all the imports above. ESLint [plugin](https://github.com/benmosher/eslint-plugin-import/): [import/first](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md)
+- [2.3](#modules--imports-above) Put all the imports above. ESLint [plugin](https://github.com/benmosher/eslint-plugin-import/): [`import/first`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md)
 
 *Why?* Imports are hoisted, keeping them all at the top, give up consistency and better developer experience.
 
@@ -175,3 +175,78 @@ import library2 from 'library2';
 library1.init();
 ```
 
+<a name="modules--not-wildcards"></a><a name="2.4"></a>
+- [2.4](#modules--not-wildcards) Do not use wildcard imports.
+
+*Why?* This makes sure you have a single default export.
+
+```javascript
+// avoid
+import * as foo from 'foo';
+
+// recommended
+import foo from 'foo';
+```
+
+<a name="modules--import-one-place"></a><a name="2.5"></a>
+- [2.5](#modules--import-one-place) Only import from a path in one place. ESLint: [`no-duplicate-imports`](http://eslint.org/docs/rules/no-duplicate-imports)
+
+*Why?* Import from the same path in different lines can make code harder to maintain.
+
+```javascript
+// avoid
+import library1 from 'library1';
+import { function1, function2 } from 'library1';
+
+// recommended
+import library1 , { function1, function2 } from 'library1';
+```
+
+<a name="modules--exports-below"></a><a name="2.6"></a>
+- [2.6](#modules--exports-below) Put all the exports at the end of the module file.
+
+*Why?* Becomes evident what you are exporting instead of having to crawl around the module.
+
+```javascript
+// avoid
+const numA = 17;
+const numB = 21;
+
+export default numA;
+
+const numC = 44;
+
+// recommended
+const numA = 17;
+const numB = 21;
+const numC = 44;
+
+export default numA; 
+
+```
+
+<a name="modules--default-export"></a><a name="2.7"></a>
+- [2.7](#modules--default-export) Always use a default export, and export an API object. ESLint [plugin](https://github.com/benmosher/eslint-plugin-import/): [`import/prefer-default-export`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/prefer-default-export.md)
+
+*Why?* [Pony Foo](https://ponyfoo.com/articles/es6-modules-in-depth#best-practices-and-export).
+
+*Why?* Consistency, having one clear way to export make things consistent.
+
+```javascript
+// wrong
+let sum = (a,b) => a+b:
+const foo = 17;
+
+export {sum, foo};
+
+// right
+let sum = (a,b) => a+b;
+const foo = 17;
+
+const api = {
+    sum,
+    foo
+}
+
+export default api;
+```
