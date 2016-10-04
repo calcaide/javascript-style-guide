@@ -233,13 +233,13 @@ export default numA;
 *Why?* Consistency, having one clear way to export make things consistent.
 
 ```javascript
-// wrong
+// avoid
 let sum = (a,b) => a+b:
 const foo = 17;
 
 export {sum, foo};
 
-// right
+// recommended
 let sum = (a,b) => a+b;
 const foo = 17;
 
@@ -250,3 +250,50 @@ const api = {
 
 export default api;
 ```
+
+<a name="modules--export-mutable"></a><a name="2.8"></a>
+- [2.8](#modules--export-mutable) Do not export mutable bindings. ESLint [plugin](https://github.com/benmosher/eslint-plugin-import/): [`import/no-mutable-exports`](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-mutable-exports.md)
+
+*Why?* Mutation should be avoided in general, but in particular when exporting mutable bindings.
+
+*Note:* If you use the technique described above, ["Always use a default export, an export and API"](#modules--default-export) You just have to think about that when working with code from a third party.
+
+```javascript
+// avoid
+let numA = 17;
+let numB = 22;
+export { numA, numB };
+
+// recommended
+const numA = 17;
+const numB = 22;
+
+const api = {
+    numA,
+    numB
+}
+
+export default api;
+```
+
+<a name="modules--export-from-import"></a><a name="2.9"></a>
+- [2.9](#modules--export-from-import) Never export directly from an import.
+
+*Why?* One line is shorter and concise, but having one clear way to import and export makes things consistent and better for the developer experience.
+
+```javascript
+// avoid
+export { FooAction, BarAction } from './actionCreators.js';
+
+// recommended
+import { FooAction, BarAction} from './actionCreators.js';
+
+const api = {
+    FooAction,
+    BarAction
+}
+
+export default api;
+```
+
+**[⬆ back to top](#table-of-contents)**
