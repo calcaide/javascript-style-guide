@@ -93,7 +93,7 @@ class BankAccount {
 const myAccount = new BankAccount('Something');
 ```
 
-<a name="naming--UPPERCASE"></a><a hre="1.4"></a>
+<a name="naming--UPPERCASE"></a>
 - [1.4](#naming-UPPERCASE) Use UPPER_CASE for **constants**. ESLint: [camelCase](http://eslint.org/docs/rules/camelcase).
 
 ```javascript
@@ -104,7 +104,7 @@ const userPermissions = 0777;
 const USER_PERMISSIONS = 0777;
 ```
 
-<a name="naming--underscores"></a><a hre="1.5"></a>
+<a name="naming--underscores"></a>
 - [1.5](#naming--underscores) Do not use trailing or leading underscores. ESLint: [no-underscore-dangle](http://eslint.org/docs/rules/no-underscore-dangle).
 
 *This rule is for the long history of using dangling underscores to indicate "private" members of objects, take more information about that in the ESLint rule [no-underscore-dangle](http://eslint.org/docs/rules/no-underscore-dangle).*
@@ -122,6 +122,5 @@ this.someNumber = 17;
 ```
 
 **[⬆ back to top](#table-of-contents)**
-
 
 
