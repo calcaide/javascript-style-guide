@@ -27,12 +27,13 @@ I have different JavaScript style guides as a reference. In fact, this style gui
 
 Here, some of this style guides that I found interesting or useful.
 
-- [Airbnb](https://github.com/airbnb/javascript).
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript).
 - [ESLint rules](http://eslint.org/docs/rules/).
 - [Idiomatic JS](https://github.com/rwaldron/idiomatic.js).
 - [Douglas Crockford](http://javascript.crockford.com/code.html).
 - [Google](https://google.github.io/styleguide/javascriptguide.xml).
 - [MDN](https://developer.mozilla.org/en/).
+- [②ality](http://www.2ality.com/).
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -336,7 +337,7 @@ class Vehicle {
 
 *Why?* It is and abstraction to inherit prototype, again, much simpler and clear than classical prototype inheritance.
 
-*Note*: in heritance, `Vehicle` class is a **base-class** and `Car` is a *derived class*.
+*Note*: in heritance, `Vehicle` class is a **base class** and `Car` is a **derived class**.
 
 ```javascript
 // avoid
@@ -386,3 +387,62 @@ class Car extends Vehicle {
 }
 
 ```
+
+<a namre="classes--super-calls"></a><a name="3.3"></a>
+- [3.3](#) Uses super calls: superconstructor and superproperties.
+
+```javascript
+class A {
+    constructor(prop1, prop2){
+        this.prop1 = prop1;
+        this.prop2 = prop2;
+    }
+
+    toString(){
+        return 'Prop1: '+this.prop1+', Prop2: '+this.prop2;
+    }
+}
+
+class B extends A {
+    constructor(prop1, prop2, prop3){
+        super(prop1, prop2);
+        this.prop3 = prop3;
+    }
+
+    toString(){
+        return super.toString()+', Prop3: '+this.prop3;
+    }
+}
+```
+
+<a name="classes--default-constructor"></a><a name="3.4"></a>
+- [3.4](#classes--default-constructor) Classes have a default constructor if one is not specified. An empty constructor function or one that just delegate to a parent class is unnecessary. ESLint: [`no-useless-constructor`](http://eslint.org/docs/rules/no-useless-constructor).
+
+```javascript
+// avoid
+class A { // Base class 
+    constructor(){
+
+    }   
+}
+
+class A extends B { // Derived class
+    constructor(..args){
+        super(...args);
+    }
+}
+
+// recommended
+
+class A { // Base class
+    
+}
+
+class A extends B { // Derived class
+    constructor(...args){
+        super(...args);
+        this.foo = 'bar';
+    }
+}
+```
+
