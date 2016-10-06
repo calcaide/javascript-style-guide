@@ -446,3 +446,22 @@ class A extends B { // Derived class
 }
 ```
 
+<a name="classes--duplicate-members"></a><a name="3.5"></a>
+- [3.5](#classes--duplicate-members) Avoid duplicate class members. ESLint: [`no-dupe-class-members`](http://eslint.org/docs/rules/no-dupe-class-members).
+
+*Why?* The last declaration overwrites other declarations silently.
+
+```javascript
+class Foo {
+    bar() {
+        return true;
+    }
+
+    bar() {
+        return false;
+    }
+}
+
+const foo = new Foo();
+foo.bar(); // false
+```
