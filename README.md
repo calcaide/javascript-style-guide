@@ -304,7 +304,7 @@ export default api;
 ## Classes
 
 <a name="classes--use-class"></a><a name="3.1"></a>
-- [3.1](#classes--use-class) Always use `class`. Avoid manipuling `prototype` directly.
+- [3.1](#classes--use-class) Always use `class`. Avoid manipulating `prototype` directly.
 
 *Why?* Javascript classes introduced in ECMAScript 6, are syntactical sugar over prototype-based inheritance and provide a much simpler and clear syntax to create objects and deal with inheritance.
 
@@ -337,7 +337,7 @@ class Vehicle {
 
 *Why?* It is and abstraction to inherit prototype, again, much simpler and clear than classical prototype inheritance.
 
-*Note*: in heritance, `Vehicle` class is a **base class** and `Car` is a **derived class**.
+*Note*: in inheritance, `Vehicle` class is a **base class**, and `Car` is a **derived class**.
 
 ```javascript
 // avoid
@@ -416,7 +416,7 @@ class B extends A {
 ```
 
 <a name="classes--default-constructor"></a><a name="3.4"></a>
-- [3.4](#classes--default-constructor) Classes have a default constructor if one is not specified. An empty constructor function or one that just delegate to a parent class is unnecessary. ESLint: [`no-useless-constructor`](http://eslint.org/docs/rules/no-useless-constructor).
+- [3.4](#classes--default-constructor) Classes have a default constructor if one is not specified. An empty constructor function or one that just delegates to a parent class is unnecessary. ESLint: [`no-useless-constructor`](http://eslint.org/docs/rules/no-useless-constructor).
 
 ```javascript
 // avoid
