@@ -5,6 +5,7 @@
 - [References](#references).
 - [Naming conventions](#naming-conventions).
 - [Modules](#modules).
+- [Classes](#classes).
 
 ***
 
@@ -14,7 +15,7 @@ The following document is a set of rules or conventions that I take from many ot
 
 This guide does not pretend to substitute the excellent other guides that are out there, is just my personal cheat sheet that I use to work and I decided to share it.
 
-I use [ECMAScript 6](https://es.wikipedia.org/wiki/ECMAScript) specification and [Babel](https://babeljs.io/) as a compiler.
+I use [ECMAScript 6](https://en.wikipedia.org/wiki/ECMAScript) specification and [Babel](https://babeljs.io/) as a compiler.
 
 Also, I have another project [js-test-bench](https://github.com/calcaide/js-test-bench) that could be used as a playground to test the conventions or rules that are here.
 
@@ -31,6 +32,7 @@ Here, some of this style guides that I found interesting or useful.
 - [Idiomatic JS](https://github.com/rwaldron/idiomatic.js).
 - [Douglas Crockford](http://javascript.crockford.com/code.html).
 - [Google](https://google.github.io/styleguide/javascriptguide.xml).
+- [MDN](https://developer.mozilla.org/en/).
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -297,3 +299,90 @@ export default api;
 ```
 
 **[⬆ back to top](#table-of-contents)**
+
+## Classes
+
+<a name="classes--use-class"></a><a name="3.1"></a>
+- [3.1](#classes--use-class) Always use `class`. Avoid manipuling `prototype` directly.
+
+*Why?* Javascript classes introduced in ECMAScript 6, are syntactical sugar over prototype-based inheritance and provide a much simpler and clear syntax to create objects and deal with inheritance.
+
+```javascript
+// avoid
+function Vehicle(type, wheels){
+    this.type = type;
+    this.wheels = wheels;
+}
+
+Vehicle.prototype.toString = function(){
+   return "Vehicle type: "+this.type+", Wheels: "+this.wheels;
+}
+
+// recommended
+class Vehicle {
+    constructor(type, wheels){
+        this.type = type;
+        this.wheels = wheels;
+    }
+
+    toString(){
+        return "Vehicle type: "+this.type+", Wheels: "+this.wheels;
+    }
+}
+```
+
+<a name="classess--use-extends"></a><a name="3.2"></a>
+- [3.2](#classes--use-extends) Use `extends` for inheritance.
+
+*Why?* It is and abstraction to inherit prototype, again, much simpler and clear than classical prototype inheritance.
+
+*Note*: in heritance, `Vehicle` class is a **base-class** and `Car` is a *derived class*.
+
+```javascript
+// avoid
+function Vehicle(type, wheels){
+    this.type = type;
+    this.wheels = wheels;
+}
+
+Vehicle.prototype.toString = function(){
+   return "Vehicle type: "+this.type+", Wheels: "+this.wheels;
+}
+
+Car.prototype = new Vehicle('Car',4);
+Car.prototype.constructor = Car;
+
+function Car(brand){
+   this.brand = brand;
+}
+
+Car.prototype.toString = function(){
+   return "Vehicle type: "+this.type+", Wheels: "+this.wheels+", Brand: "+this.brand;
+}
+
+// recommended
+class Vehicle {
+
+    constructor(type, wheels){
+        this.type = type;
+        this.wheels = wheels;
+    }
+
+    toString(){
+        return "Vehicle type: "+this.type+", Wheels "+this.wheels;
+    }
+}
+
+class Car extends Vehicle {
+
+    constructor(type, wheels, brand){
+        super(type, wheels);
+        this.brand = brand;
+    }
+
+    toString(){
+        super.toString()+", Brand "+this.brand;
+    }
+}
+
+```
