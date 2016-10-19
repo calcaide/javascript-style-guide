@@ -28,6 +28,7 @@ Here, some of this style guides that I found interesting or useful.
 1. [Naming conventions](#naming-conventions).
 2. [Modules](#modules).
 3. [Classes](#classes).
+4. [Blocks](#blocks).
 
 ***
 
@@ -459,3 +460,25 @@ class Foo {
 const foo = new Foo();
 foo.bar(); // false
 ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Blocks
+<a name="blocks--brace-style"></a><a name="4.1"></a>
+- [4.1](#blocks--brace-style) Use always braces with all multi-line blocks and put the next condition in the same place that the first close the brace (the most clear example of that is with an `if` `else` statement).
+
+*Why?* to follow [the one true brace style](https://en.wikipedia.org/wiki/Indent_style#Variant:_1TBS_.28OTBS.29)
+
+```javascript
+// avoid
+function foo(){ return false; }
+
+if(something)
+    return true;
+
+if(true){
+    return false;
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
