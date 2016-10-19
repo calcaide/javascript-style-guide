@@ -504,7 +504,7 @@ if(true){
 
 ## Variables
 <a name="variables--never-use-var"></a><a name="5.1"></a>
-- [5.1](#variables--never-use-var) Never use `var`, use always `const` or `let`. ESLint: [`no-var`](http://eslint.org/docs/rules/no-var).
+- [5.1](#variables--never-use-var) Never use `var`, always use `const` or `let`. ESLint: [`no-var`](http://eslint.org/docs/rules/no-var).
 
 *Why?* `let` and `const` are block scoped instead of `var`, that is a function scoped.
 
@@ -521,7 +521,7 @@ const VERSION = 1;
 <a name="variables--always-use-const"></a><a name="5.2"></a>
 - [5.2](#variables--always-use-const) Always use `const` to declare variables that don't need to reassign. ESLint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const).
 
-*Why?* `const` declaration means the variable is never reassigned, reducing cognitive load an improving maintainability.
+*Why?* `const` declaration means the variable is never reassigned, reducing cognitive load and improving maintainability.
 
 ```javascript
 // avoid
@@ -542,3 +542,60 @@ for(let foo = 0; foo < 3; foo+=1){
     console.log(foo);
 }
 ```
+
+<a name="variables--one-declaration"></a><a name="5.3"></a>
+- [5.3](#variables--one-declaration) Use one `const` or `let` declaration per variable. ESLint: [`one-var`](http://eslint.org/docs/rules/one-var).
+
+*Why?* Mainly for the style but also for developer experience (always use a `;` at the end of a declaration).
+
+```javascript
+// avoid
+const   foo,
+        bar;
+let     fox,
+        box;
+
+// recommended
+const foo;
+const bar;
+let fox;
+let box;
+```
+
+<a name="variables--group"></a><a name="5.4"></a>
+- [5.4](#variables--group) Group all your `const`s and then group all your `let`s.
+
+*Why?* Improve developer experience.
+
+```javascript
+// avoid
+const favNum = 17;
+let foo = 'bar';
+const i;
+let counter;
+
+// recommended
+const favNum = 17;
+const i;
+let foo = 'bar';
+let counter;
+```
+
+<a name="variables--unary"></a><a name="5.5"></a>
+- [5.5](#variables--unary) Not use unary `++` increments and `--` decrements. ESLint: [`no-plusplus](http://eslint.org/docs/rules/no-plusplus).
+
+*Why?* From ESLint documentation: the unary `++` and `--` operators are subject to automatic semicolon insertion, differences in whitespace can change semantics of source code.
+
+*Why?* Is more clear to mutate values with `num += 1` than `num++`.
+
+```javascript
+// avoid
+let counter = 0;
+counter++;
+
+// recommended
+let counter = 0;
+counter +=1;
+```
+
+**[⬆ back to top](#table-of-contents)**
