@@ -29,6 +29,7 @@ Here, some of this style guides that I found interesting or useful.
 2. [Modules](#modules).
 3. [Classes](#classes).
 4. [Blocks](#blocks).
+5. [Variables](#variables).
 
 ***
 
@@ -301,7 +302,7 @@ export default api;
 <a name="classes--use-class"></a><a name="3.1"></a>
 - [3.1](#classes--use-class) Always use `class`. Avoid manipulating `prototype` directly.
 
-*Why?* Javascript classes introduced in ECMAScript 6, are syntactical sugar over prototype-based inheritance and provide a much simpler and clear syntax to create objects and deal with inheritance.
+*Why?* Javascript classes introduced in ECMAScript 6, are syntactical sugar over prototype-based inheritance and provide a much simpler and clear syntax to create objects and deal with class inheritance.
 
 ```javascript
 // avoid
@@ -465,7 +466,7 @@ foo.bar(); // false
 
 ## Blocks
 <a name="blocks--brace-style"></a><a name="4.1"></a>
-- [4.1](#blocks--brace-style) Use always braces with all multi-line blocks and put the next condition in the same place that the first close the brace (the most clear example of that is with an `if` `else` statement).
+- [4.1](#blocks--brace-style) Use always braces with all multi-line blocks and put the next condition in the same place that the first close the brace (the clearest example of that is with an `if` `else` statement). ESLint: [`brace-style`](http://eslint.org/docs/rules/brace-style.html)
 
 *Why?* to follow [the one true brace style](https://en.wikipedia.org/wiki/Indent_style#Variant:_1TBS_.28OTBS.29)
 
@@ -479,6 +480,65 @@ if(something)
 if(true){
     return false;
 }
+else{
+    return true;
+}
+
+// recommended
+function foo(){
+    return false;   
+}
+
+if(something){
+    return true;
+}
+
+if(true){
+    return false;
+}else{
+    return true;
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
+
+## Variables
+<a name="variables--never-use-var"></a><a name="5.1"></a>
+- [5.1](#variables--never-use-var) Never use `var`, use always `const` or `let`. ESLint: [`no-var`](http://eslint.org/docs/rules/no-var).
+
+*Why?* `let` and `const` are block scoped instead of `var`, that is a function scoped.
+
+```javascript
+// avoid
+var foo = "bar";
+var VERSION = 1;
+
+// recommended
+let foo = "bar";
+const VERSION = 1;
+```
+
+<a name="variables--always-use-const"></a><a name="5.2"></a>
+- [5.2](#variables--always-use-const) Always use `const` to declare variables that don't need to reassign. ESLint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const).
+
+*Why?* `const` declaration means the variable is never reassigned, reducing cognitive load an improving maintainability.
+
+```javascript
+// avoid
+for(let foo in [1,2,3]){ // foo is redefined (not reassigned) on each loop step.
+    console.log(foo);
+}
+
+for(const foo = 0; foo < 3; foo+=1){ // ERROR. foo is reassigned with a new value each loop step.
+    console.log(foo);
+}
+
+// recommended
+for(const foo in [1,2,3]){ 
+    console.log(foo);
+}
+
+for(let foo = 0; foo < 3; foo+=1){
+    console.log(foo);
+}
+```
